@@ -12,7 +12,7 @@ from typing import List
 
 class TriangularMesh:
 
-    def __init__(self, vertices : List[List[3]], triangles : List[Vertex[3]]):
+    def __init__(self, vertices : List[List[3]], triangles : List[int[3]]):
 
         self.vertices = []
         j = 0
