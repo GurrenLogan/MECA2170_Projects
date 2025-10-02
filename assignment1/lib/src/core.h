@@ -5,27 +5,31 @@
 #include <stdio.h>
 
 #define l __LINE__
+#define FLOAT_MIN -1000000000
+#define FLOAT_MAX 1000000000
 
 void err_mess(int line);
 
 typedef struct msh{
     float** vertices;
     size_t vertices_size;
-    size_t dim;
     int** triangles;
     size_t triangles_size;
 }Msh;
 
 typedef struct initstate{
-    int* starting_points;
-    int* infinite_points;
+    float** starting_points;
+    float** infinite_points;
 }InitState;
 
-Msh* msh_alloc(size_t vertices_size,size_t dim,size_t triangles_size);
+Msh* msh_alloc(size_t vertices_size,size_t triangles_size);
 void msh_free(Msh* msh);
+void init_state_free(InitState* init);
 
-int* find_supertriangle(float** points);
-InitState* find_init_points(float** points,int points_size, int dim, float L);
+float find_max(float** points, size_t points_size, int i);
+float find_min(float** points, size_t points_size, int i);
+
+InitState* find_init_points(float** points,size_t points_size, float L);
 
 Msh* delaunay_bowyer_watson(float** points);
 Msh* delaunay_bowyer_watson_opt(float** points);
